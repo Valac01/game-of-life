@@ -1,0 +1,17 @@
+{
+  "name": "game-of-life",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build": "esbuild ./src/main.ts --bundle --minify --outfile=./build/main.js",
+    "dev": "esbuild ./src/main.ts --bundle --sourcemap  --outfile=./build/main.js --watch"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "esbuild": "^0.13.8",
+    "pixi.js": "^6.1.3"
+  }
+}
