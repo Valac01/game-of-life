@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "build": "esbuild ./src/main.ts --bundle --minify --outfile=./build/main.js",
+    "build": "node esbuild.build.js",
     "dev": "node esbuild.dev.js"
   },
   "keywords": [],
