@@ -11,7 +11,7 @@ const resolution = 20
 app.renderer.resize(resolution * cols, resolution * rows)
 app.renderer.backgroundColor = 0xE9F9FC
 
-document.body.appendChild(app.view)
+document.getElementById('game').appendChild(app.view)
 
 function make2DArray(rows: number, cols: number): number[][] {
   const arr = new Array(rows)
@@ -34,7 +34,7 @@ function setup() {
 setup()
 drawCells(current)
 
-app.ticker.add(delta => loop(delta))
+// app.ticker.add(delta => loop(delta))
 
 function loop(delta) {
   app.stage.removeChildren()
