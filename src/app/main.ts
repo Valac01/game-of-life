@@ -1,15 +1,18 @@
-import * as PIXI from 'pixi.js'
+import { Application, Graphics } from 'pixi.js'
 
-const app = new PIXI.Application()
+const app = new Application()
 
 let current: number[][]
 let next: number[][]
 const rows = 20
 const cols = 40
 const resolution = 20
+const bgColor = 0xF6F7F8
+const cellColor = 0x20A4F3
+const lineColor = 0xFFFFFF
 
 app.renderer.resize(resolution * cols, resolution * rows)
-app.renderer.backgroundColor = 0xE9F9FC
+app.renderer.backgroundColor = bgColor
 
 document.getElementById('game').appendChild(app.view)
 
@@ -47,13 +50,13 @@ function loop(delta) {
 function drawCells(grid: number[][]): void {
   for (let i = 0; i < rows; i++) {
     for (let j = 0; j < cols; j++) {
-      const rect = new PIXI.Graphics()
+      const rect = new Graphics()
       if (grid[i][j]) {
-        rect.beginFill(0x10505D)
+        rect.beginFill(cellColor)
       } else {
-        rect.beginFill(0x10505D, 0)
+        rect.beginFill(cellColor, 0)
       }
-      rect.lineStyle(1, 0xFFFFFF)
+      rect.lineStyle(1, lineColor)
       rect.drawRect(j * resolution, i * resolution, resolution - 1, resolution - 1)
       rect.endFill()
 
