@@ -3,8 +3,99 @@
 
 body {
   font-family: 'Nunito Sans', sans-serif;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 h1 {
-  color: coral;
+  padding-top: 14px;
+  color: #FF3366;
+  font-size: 48px;
+  margin: 0;
+  text-align: center;
+}
+
+#game {
+  display: flex;
+  justify-content: center;
+}
+
+#controls {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.status {
+  color: #FF3366;
+  font-size: 18px;
+  margin: 0;
+  padding: 18px 24px;
+  font-weight: bold;
+  text-align: center;
+  text-transform: uppercase;
+  border: 1px solid #FF3366;
+  border-radius: 999px;
+}
+
+.seperator {
+  content: '';
+  border-left: 1px solid #FF3366;
+  height: 54px;
+  margin: 0 10px;
+}
+
+.btn {
+  display: flex;
+  border: none;
+  border-radius: 999px;
+  cursor: pointer;
+  margin-right: 24px;
+}
+
+.btn-primary {
+  color: #ffffff;
+  font-size: 18px;
+  padding: 18px 24px;
+  font-weight: bold;
+  text-transform: uppercase;
+  background: linear-gradient(135deg, #ff3366 0%, #ff336680 100%);
+  box-shadow: 0 0 10px 1px #ff3366;
+}
+
+.btn-primary>svg {
+  color: #ffffff;
+}
+
+.btn-primary>span {
+  margin-right: 8px;
+}
+
+.btn-icon {
+  background-color: #ffffff;
+  padding: 18px;
+  box-shadow: 0 0 10px 1px #00000036;
+}
+
+svg {
+  color: #ff3366B0;
+  height: 24px;
+}
+
+.footer {
+  text-align: center;
+}
+
+.footer>p {
+  margin: 2px 0px;
+  font-size: 14px;
+  color: #777777;
+}
+
+.footer>a {
+  text-decoration: none;
+  font-size: 12px;
+  opacity: 0.8;
 }
