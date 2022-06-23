@@ -4,6 +4,14 @@
 
 To build and run it, you need to have [node](https://nodejs.org/) installed.
 
+## Game controls
+
+* Create a cell in grid.
+  * `ctrl` + `mouse move`
+
+* Erase a cell in greid.
+  * `shift` + `mouse move`
+
 ## Install Dependencies
 
 ```bash
@@ -11,6 +19,8 @@ npm install
 ```
 
 ## Run in development mode
+
+Note: Hot reload is not supported, to see changes you have to manually reload then page.
 
 ```bash
 npm run dev

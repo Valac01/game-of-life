@@ -1,7 +1,10 @@
-import { Application, Graphics } from 'pixi.js'
+import { Application } from 'pixi.js'
 import { Cell } from './cell'
+import './ui'
+import { updateGameStatus } from './ui'
 
-const app = new Application()
+let app: Application
+const gameEl = document.querySelector('#game') as HTMLDivElement
 
 let current: Cell[][]
 let next: boolean[][]
@@ -12,10 +15,19 @@ const bgColor = 0xF6F7F8
 const cellColor = 0x20A4F3
 const lineColor = 0xFFFFFF
 
-app.renderer.resize(resolution * cols, resolution * rows)
-app.renderer.backgroundColor = bgColor
+// App controls
+const maxFps = 15
+let isTickerFncAdded = false
 
-document.getElementById('game').appendChild(app.view)
+function setupApp() {
+  app = new Application()
+  app.ticker.maxFPS = maxFps
+  app.renderer.resize(resolution * cols, resolution * rows)
+  app.renderer.backgroundColor = bgColor
+  gameEl.appendChild(app.view)
+}
+
+setupApp()
 
 function createGrid(rows: number, cols: number): Cell[][] {
   const arr = new Array(rows)
@@ -24,8 +36,7 @@ function createGrid(rows: number, cols: number): Cell[][] {
   }
   for (let i = 0; i < rows; i++) {
     for (let j = 0; j < cols; j++) {
-      const aliveVal = Math.floor(Math.random() * 2) ? true : false
-      arr[i][j] = new Cell(aliveVal, j * resolution, i * resolution, resolution - 1, resolution - 1)
+      arr[i][j] = new Cell(false, j * resolution, i * resolution, resolution - 1, resolution - 1)
     }
   }
   return arr
@@ -58,9 +69,7 @@ function setup() {
 
 setup()
 
-app.ticker.add(delta => loop(delta))
-
-function loop(delta) {
+function loop() {
   computeNextGen()
   updateCurrent()
   next = createNextGrid(rows, cols)
@@ -82,7 +91,6 @@ function computeNextGen() {
       const state = current[i][j].isAlive() ? 1 : 0
       let neighbors = 0
       neighbors = countNeighbors(current, i, j)
-      console.log(i, j, neighbors)
       if (state === 0 && neighbors === 3) {
         next[i][j] = true
       } else if (state == 1 && (neighbors < 2 || neighbors > 3)) {
@@ -107,4 +115,28 @@ function countNeighbors(grid: Cell[][], i: number, j: number): number {
   }
   sum -= currCell.isAlive() ? 1 : 0
   return sum
+}
+
+export function pauseGame() {
+  app.ticker.stop()
+  updateGameStatus("Paused")
+}
+
+export function startGame() {
+  if (!isTickerFncAdded) {
+    app.ticker.add(() => loop())
+  }
+  app.ticker.start()
+  isTickerFncAdded = true
+  updateGameStatus("Playing")
+}
+
+export function resetGame() {
+  // Reset the canvas
+  isTickerFncAdded = false
+  app.destroy()
+  gameEl.firstChild?.remove()
+  setupApp()
+  setup()
+  updateGameStatus("Drawing Mode")
 }
