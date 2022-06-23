@@ -9,7 +9,7 @@ To build and run it, you need to have [node](https://nodejs.org/) installed.
 * Create a cell in grid.
   * `ctrl` + `mouse move`
 
-* Erase a cell in greid.
+* Erase a cell in grid.
   * `shift` + `mouse move`
 
 ## Install Dependencies
